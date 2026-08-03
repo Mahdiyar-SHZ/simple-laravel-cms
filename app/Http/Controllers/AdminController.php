@@ -54,5 +54,7 @@ class AdminController extends Controller
         return back()->withErrors(['code'=> 'Invalid verification code']);
     }
 
-
+    public function AdminProfile(){
+        return view('admin.admin_profile');
+    }
 }
