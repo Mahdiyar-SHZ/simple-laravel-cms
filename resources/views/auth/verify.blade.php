@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Log In | Tapeli - Responsive Admin Dashboard Template</title>
+    <title>Verification page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
     <meta name="author" content="Zoyothemes" />
@@ -38,6 +38,14 @@
 
                                 <div class="pt-0">
                                     <!-- نمایش پیام خطای کلی فوقانی -->
+
+
+                                    @if (session('status'))
+                                    <div class="alert alert-success">
+                                        {{ session(('status')) }}
+                                    </div>
+                                    @endif
+
                                     @if ($errors->any())
                                     <div class="alert alert-danger mb-3 p-2 small">
                                         <ul class="mb-0 ps-3">
@@ -47,7 +55,7 @@
                                         </ul>
                                     </div>
                                     @endif
-                                    <form method="POST" action="{{ route('admin.login') }}" class="my-4">
+                                    <form method="POST" action="{{ route('custom.verification.verify') }}" class="my-4">
                                         @csrf
 
                                         @if(session('error'))
@@ -58,25 +66,18 @@
 
                                         @endif
                                         <div class="form-group mb-3">
-                                            <label for="emailaddress" class="form-label">Email address</label>
-                                            <input class="form-control" type="email" name="email" id="email" value="{{ old('email') }}" required placeholder="Enter your email">
+                                            <label for="emailaddress" class="form-label">Code</label>
+                                            <input class="form-control" type="text" name="code" id="code" value="{{ old('email') }}" required placeholder="Enter your verification code">
 
-                                            @error('')
+                                            @error('code')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
 
-                                        <div class="form-group mb-3">
-                                            <label for="password" class="form-label">Password</label>
-                                            <input class="form-control" type="password" required="" name="password" id="password" placeholder="Enter your password">
-                                        </div>
-
-
-
                                         <div class="form-group mb-0 row">
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button class="btn btn-primary" type="submit"> Log In </button>
+                                                    <button class="btn btn-primary" type="submit"> Verify </button>
                                                 </div>
                                             </div>
                                         </div>
