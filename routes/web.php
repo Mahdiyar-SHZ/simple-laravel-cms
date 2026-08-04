@@ -30,4 +30,7 @@ Route::post('/verify', [AdminController::class,'VerificationVerify'])->name('cus
 Route::middleware('auth')->group(function () {
 
 Route::get('/profile', [AdminController::class,'AdminProfile'])->name('admin.profile');
+
+Route::post('/profile/store', [AdminController::class,'ProfileStore'])->name('profile.store');
+
 });
