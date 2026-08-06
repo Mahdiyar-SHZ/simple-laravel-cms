@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerificationCodeMail;
+use Illuminate\Http\Resources\JsonApi\RelationResolver;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -90,9 +92,15 @@ class AdminController extends Controller
             }
         }
 
+        
         $data->save();
+        
+        $notification = array(
+            'message' => 'profile updated successfully',
+            'alert-type' => 'success'
+        );
 
-        return redirect()->back();
+        return redirect()->back()->with($notification);
     }
 
 
@@ -104,5 +112,33 @@ class AdminController extends Controller
                 unlink($path);
             }
         }
+    }
+
+    public function ChangePassword(Request $request){
+        $id = Auth::user()->id;
+        $data = User::find($id);
+
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+        if(!Hash::check($request->old_password, $data->password)){
+            $notification = array(
+                'message' => 'رمز عبور فعلی اشتباه است',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+        User::whereId($id)->update([
+        'password' => Hash::make($request->new_password)
+    ]);
+
+        $data->save();
+        $notification = array(
+                'message' => 'رمز با موفقت تغییر کرد!',
+                'alert-type' => 'success'
+            );
+        return redirect()->back()->with($notification);
     }
 }

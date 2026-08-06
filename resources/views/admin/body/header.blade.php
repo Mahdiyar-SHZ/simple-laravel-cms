@@ -82,7 +82,6 @@
                                 </div>
                             </a>
 
-
                         </div>
 
                         <!-- All-->
@@ -94,6 +93,13 @@
                     </div>
                 </li>
 
+                @php
+                use App\Models\User;
+                $id = Auth::user()->id;
+                $profileData = User::find($id);
+                @endphp
+
+                <!-- بخش پروفایل کاربر -->
                 <li class="dropdown notification-list topbar-dropdown">
                     <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="{{ (!empty($profileData->photo)) ? url('upload/user_image/' . $profileData->photo) : url('upload/no-image.jpeg') }}" alt="user-image" class="rounded-circle">
@@ -132,7 +138,6 @@
 
             </ul>
         </div>
-
     </div>
-
 </div>
+

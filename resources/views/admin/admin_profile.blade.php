@@ -121,30 +121,38 @@
                                         <div class="card border mb-0">
 
                                             <div class="card-header">
-                                                <div class="row align-items-center">
-                                                    <div class="col">
-                                                        <h4 class="card-title mb-0">Change Password</h4>
-                                                    </div><!--end col-->
-                                                </div>
+                                                <form action="{{ route('profile.change_pass') }}" method="post">
+                                                    @csrf
+                                                    <div class="row align-items-center">
+                                                        <div class="col">
+                                                            <h4 class="card-title mb-0">Change Password</h4>
+                                                        </div><!--end col-->
+                                                    </div>
                                             </div>
 
                                             <div class="card-body mb-0">
                                                 <div class="form-group mb-3 row">
                                                     <label class="form-label">Old Password</label>
                                                     <div class="col-lg-12 col-xl-12">
-                                                        <input class="form-control" type="password" placeholder="Old Password">
+                                                        <input class="form-control" type="password" name="old_password" placeholder="Old Password">
+                                                        @error('old_password')
+                                                        <span class="text-danger small mt-1 d-block">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group mb-3 row">
                                                     <label class="form-label">New Password</label>
                                                     <div class="col-lg-12 col-xl-12">
-                                                        <input class="form-control" type="password" placeholder="New Password">
+                                                        <input class="form-control" type="password" name="new_password" placeholder="New Password">
+                                                        @error('new_password')
+                                                        <span class="text-danger small mt-1 d-block">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group mb-3 row">
                                                     <label class="form-label">Confirm Password</label>
                                                     <div class="col-lg-12 col-xl-12">
-                                                        <input class="form-control" type="password" placeholder="Confirm Password">
+                                                        <input class="form-control" type="password" name="new_password_confirmation" placeholder="Confirm Password">
                                                     </div>
                                                 </div>
 
@@ -153,6 +161,7 @@
                                                         <button type="submit" class="btn btn-primary">Change Password</button>
                                                         <button type="button" class="btn btn-danger">Cancel</button>
                                                     </div>
+                                                    </form>
                                                 </div>
 
                                             </div><!--end card-body-->
@@ -187,5 +196,7 @@
         })
     })
 </script>
+
+
 
 @endsection

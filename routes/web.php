@@ -33,4 +33,6 @@ Route::get('/profile', [AdminController::class,'AdminProfile'])->name('admin.pro
 
 Route::post('/profile/store', [AdminController::class,'ProfileStore'])->name('profile.store');
 
+Route::post('/profile/change-pass', [AdminController::class,'ChangePassword'])->name('profile.change_pass');
+
 });
