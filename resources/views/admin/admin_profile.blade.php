@@ -136,7 +136,7 @@
                                                     <div class="col-lg-12 col-xl-12">
                                                         <input class="form-control" type="password" name="old_password" placeholder="Old Password">
                                                         @error('old_password')
-                                                        <span class="text-danger small mt-1 d-block">{{ $message }}</span> test
+                                                        <span class="text-danger small mt-1 d-block">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
