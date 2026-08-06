@@ -135,10 +135,11 @@ class AdminController extends Controller
     ]);
 
         $data->save();
+        Auth::logout();
         $notification = array(
                 'message' => 'رمز با موفقت تغییر کرد!',
                 'alert-type' => 'success'
             );
-        return redirect()->back()->with($notification);
+        return redirect()->route('login')->with($notification);
     }
 }

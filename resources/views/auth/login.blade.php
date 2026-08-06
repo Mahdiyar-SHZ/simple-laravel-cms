@@ -19,6 +19,7 @@
     <!-- Icons -->
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body class="bg-white">
@@ -154,6 +155,28 @@
     <!-- App js-->
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
+    <!-- Toastr JS از Cloudflare -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    @if(Session::has('message'))
+    <script>
+        var type = "{{ Session::get('alert-type', 'success') }}";
+        switch (type) {
+            case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+        }
+    </script>
+    @endif
 </body>
 
 </html>
