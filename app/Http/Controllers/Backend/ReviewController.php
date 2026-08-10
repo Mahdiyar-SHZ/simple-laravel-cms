@@ -16,7 +16,7 @@ class ReviewController extends Controller
         return view('admin.backend.review.all_review', compact('reviews'));
     }
 
-    
+
 
     public function Addreview()
     {
@@ -47,5 +47,55 @@ class ReviewController extends Controller
         );
 
         return redirect()->route('all.review')->with($notification);
+    }
+
+    public function EditReview(Request $request, $id)
+    {
+        $review = Review::find($id);
+        return view('admin.backend.review.edit_review', compact('review'));
+    }
+
+    public function UpdateReview(Request $request,$id) {
+        $review_id = $id;
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            $manager = ImageManager::usingDriver(Driver::class);
+            $img = $manager->decode($image->getPathname());
+            $img->resize(60, 60)->save(public_path('upload/review/' . $name_gen));
+            $save_url = 'upload/review/' . $name_gen;
+
+            Review::find($review_id)->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'message' => $request->message,
+                'image' => $save_url,
+            ]);
+
+            $notification = array(
+            'message' => 'Review Updated witdh image successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.review')->with($notification);
+
+        }else{
+
+        Review::find($review_id)->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'message' => $request->message,
+            ]);
+
+            $notification = array(
+            'message' => 'Review Updated without image successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.review')->with($notification);
+
+        }
+
+        
     }
 }
