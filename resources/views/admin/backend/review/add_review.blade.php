@@ -38,57 +38,57 @@
                                             </div>
 
                                             <div class="card-body">
-        <form action="{{ route('add.review') }}" enctype="multipart/form-data" method="post">
-            @csrf
+                                                <form action="{{ route('store.review') }}" enctype="multipart/form-data" method="post">
+                                                    @csrf
 
-            <div class="form-group mb-3 row">
-                <label class="form-label">Name</label>
-                <div class="col-lg-12 col-xl-12">
-                    <input class="form-control" type="text" name="name" value="">
-                </div>
-            </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label">Name</label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <input class="form-control" type="text" name="name" value="">
+                                                        </div>
+                                                    </div>
 
-            <div class="form-group mb-3 row">
-                <label class="form-label">Position</label>
-                <div class="col-lg-12 col-xl-12">
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="mdi mdi-email"></i></span>
-                        <input type="text" class="form-control" value="" name="position" placeholder="Position" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-            </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label">Position</label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-text"><i class="mdi mdi-email"></i></span>
+                                                                <input type="text" class="form-control" value="" name="position" placeholder="Position" aria-describedby="basic-addon1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
 
-            <div class="form-group mb-3 row">
-                <label class="form-label">Message</label>
-                <div class="col-lg-12 col-xl-12">
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="mdi mdi-email"></i></span>
-                        <textarea class="form-control" name="message"></textarea>
-                    </div>
-                </div>
-            </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label">Message</label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-text"><i class="mdi mdi-email"></i></span>
+                                                                <textarea class="form-control" name="message"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-            <div class="form-group mb-3 row">
-                <label class="form-label">User Photo</label>
-                <div class="col-lg-12 col-xl-12">
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="mdi mdi-email"></i></span>
-                        <input type="file" class="form-control" value="" id="image" name="image">
-                    </div>
-                </div>
-            </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label">User Photo</label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-text"><i class="mdi mdi-email"></i></span>
+                                                                <input type="file" class="form-control" value="" id="image" name="image">
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-            <div class="form-group mb-3 row">
-                <label class="form-label"></label>
-                <div class="col-lg-12 col-xl-12">
-                    <img src="{{ url('upload/no-image.jpeg') }}" class="rounded-circle avatar-xxl img-thumbnail float-start" id="showImage" alt="image profile">
-                </div>
-            </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label"></label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <img src="{{ url('upload/no-image.jpeg') }}" class="rounded-circle avatar-xxl img-thumbnail float-start" id="showImage" alt="image profile">
+                                                        </div>
+                                                    </div>
 
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-    </div><!--end card-body-->
-    </form>
+                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            </div><!--end card-body-->
+                                            </form>
                                         </div>
                                     </div>
 

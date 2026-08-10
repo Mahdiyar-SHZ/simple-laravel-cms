@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="lonyo-testimonial-slider-init">
-        <div class="lonyo-t-wrap wrap2 light-bg">
+        <!-- <div class="lonyo-t-wrap wrap2 light-bg">
             <div class="lonyo-t-ratting">
                 <img src="{{ asset('frontend/assets/images/shape/star.svg') }}" alt="">
             </div>
@@ -107,25 +107,26 @@
                     <span>CEO of GreenLeaf Organics</span>
                 </div>
             </div>
-        </div>
+        </div> -->
+        @foreach ($reviews as $key=> $item)
         <div class="lonyo-t-wrap wrap2 light-bg">
             <div class="lonyo-t-ratting">
                 <img src="{{ asset('frontend/assets/images/shape/star.svg') }}" alt="">
             </div>
             <div class="lonyo-t-text">
-                <p>"Having all my accounts in one place gives me complete control over my money. So user-friendly and helpful! Highly recommend!"</p>
+                <p>{{ $item->message }}</p>
             </div>
             <div class="lonyo-t-author">
                 <div class="lonyo-t-author-thumb">
-                    <img src="{{ asset('frontend/assets/images/v1/img6.png') }}" alt="">
+                    <img src="{{ asset($item->image) }} " alt="">
                 </div>
                 <div class="lonyo-t-author-data">
-                    <p>Aisha Hassan</p>
-                    <span>CEO of RoyexLeaf Organics</span>
+                    <p>{{ $item->name }}</p>
+                    <span>{{ $item->position  }}</span>
                 </div>
             </div>
         </div>
-
+        @endforeach
     </div>
     <div class="lonyo-t-overlay2">
         <img src="{{ asset('frontend/assets/images/v2/overlay.png') }}" alt="">
