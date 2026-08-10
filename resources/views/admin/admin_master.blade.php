@@ -12,28 +12,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- App favicon -->
     <style>
-    /* درست کردن ظاهر نوتیفیکیشن اگر استایلش لود نشده باشه */
-    #toast-container > div {
-        opacity: 1 !important;
-        background-color: #333 !important;
-        color: #fff !important;
-        padding: 15px 20px 15px 50px !important;
-        border-radius: 4px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.3) !important;
-    }
-    #toast-container > div.toast-success {
-        background-color: #51a351 !important;
-    }
-    #toast-container > div.toast-error {
-        background-color: #bd362f !important;
-    }
-</style>
+        /* درست کردن ظاهر نوتیفیکیشن اگر استایلش لود نشده باشه */
+        #toast-container>div {
+            opacity: 1 !important;
+            background-color: #333 !important;
+            color: #fff !important;
+            padding: 15px 20px 15px 50px !important;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        #toast-container>div.toast-success {
+            background-color: #51a351 !important;
+        }
+
+        #toast-container>div.toast-error {
+            background-color: #bd362f !important;
+        }
+    </style>
+
+    <!-- Datatables css -->
+    <link href="{{ asset('backend/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/libs/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- App css -->
     <link href="{{ asset('backend/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- Icons -->
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
 
 </head>
 
@@ -83,6 +93,13 @@
     <script src="{{ asset('backend/assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/feather-icons/feather.min.js') }}"></script>
 
+    <!-- Datatables js -->
+    <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+
+    <!-- dataTables.bootstrap5 -->
+    <script src="{{ asset('backend/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+
     <!-- Apexcharts JS -->
     <script src="{{ asset('backend/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
@@ -99,7 +116,10 @@
     <!-- Toastr JS از Cloudflare -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    @if(Session::has('message'))
+    <!-- Datatable Demo App Js -->
+    <script src="{{ asset('backend/assets/js/pages/datatable.init.js') }}"></script>
+
+    @if(Session::has('message')) 
     <script>
         var type = "{{ Session::get('alert-type', 'success') }}";
         switch (type) {

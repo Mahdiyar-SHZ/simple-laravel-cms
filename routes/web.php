@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\ReviewController;
 Route::get('/', function () {
     return view('home.index');
 });
@@ -35,4 +36,13 @@ Route::post('/profile/store', [AdminController::class,'ProfileStore'])->name('pr
 
 Route::post('/profile/change-pass', [AdminController::class,'ChangePassword'])->name('profile.change_pass');
 
+});
+
+Route::middleware('auth')->group(function () {
+    Route::controller(ReviewController::class)->group(
+        function () {
+            Route::get('/all/review', 'AllReview')->name('all.review');
+            Route::get('/add/review','Addreview')->name('add.review');
+        }
+    );
 });
