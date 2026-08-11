@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Review;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -55,7 +56,8 @@ class ReviewController extends Controller
         return view('admin.backend.review.edit_review', compact('review'));
     }
 
-    public function UpdateReview(Request $request,$id) {
+    public function UpdateReview(Request $request, $id)
+    {
         $review_id = $id;
         if ($request->file('image')) {
             $image = $request->file('image');
@@ -73,29 +75,41 @@ class ReviewController extends Controller
             ]);
 
             $notification = array(
-            'message' => 'Review Updated witdh image successfully',
-            'alert-type' => 'success'
-        );
+                'message' => 'Review Updated witdh image successfully',
+                'alert-type' => 'success'
+            );
 
-        return redirect()->route('all.review')->with($notification);
+            return redirect()->route('all.review')->with($notification);
+        } else {
 
-        }else{
-
-        Review::find($review_id)->update([
+            Review::find($review_id)->update([
                 'name' => $request->name,
                 'position' => $request->position,
                 'message' => $request->message,
             ]);
 
             $notification = array(
-            'message' => 'Review Updated without image successfully',
-            'alert-type' => 'success'
-        );
+                'message' => 'Review Updated without image successfully',
+                'alert-type' => 'success'
+            );
 
-        return redirect()->route('all.review')->with($notification);
+            return redirect()->route('all.review')->with($notification);
+        }
+    }
 
+    public function DeleteReview($id)
+    {
+        $review = Review::findOrFail($id);
+        $img = $review->image;
+        if(File::exists($img)) {
+            unlink($img);
         }
 
-        
+        $review->delete();
+        $notification = array(
+            'message' => 'Review Deleted successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.review')->with($notification);
     }
 }
