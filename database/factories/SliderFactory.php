@@ -1,0 +1,27 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Slider;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<Slider>
+ */
+class SliderFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+        'title' => $this->faker->sentence(3),
+        'description' => $this->faker->sentence(),
+        'image' => public_path('upload/no-image.jpeg'), // یا عکسی که برای تست داری
+        'link' => $this->faker->url(),
+    ];
+    }
+}

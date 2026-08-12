@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\ReviewController;
+use App\Http\Controllers\Backend\SliderController;
 use App\Models\Review;
 
 Route::get('/', function () {
@@ -49,6 +50,15 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/review/{id}', 'EditReview')->name('edit.review');
             Route::post('/update/review/{id}', 'UpdateReview')->name('update.review');
             Route::get('/delete/review/{id}', 'DeleteReview')->name('delete.review');
+        }
+    );
+
+
+    Route::controller(SliderController::class)->group(
+        function () {
+            Route::get('/get/slider', 'GetSlider')->name('get.slider');
+            Route::post('/update/slider/{id}', 'UpdateSlider')->name('update.slider');
+            Route::post('/edit-slider/{id}', 'ElementUpdate');
         }
     );
 });

@@ -1,3 +1,8 @@
+@php
+$slider = App\Models\Slider::findOrFail(1);
+$isLoggedIn = auth()->check(); // بررسی اینکه آیا کاربر لاگین کرده یا نه
+@endphp
+
 <div class="lonyo-section-padding2 position-relative">
     <div class="container">
         <div class="lonyo-section-title center">
@@ -74,3 +79,57 @@
     </div>
     <div class="lonyo-feature-shape"></div>
 </div>
+
+
+
+
+<!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleElement = document.getElementById('title')
+        const descriptionElement = document.getElementById('description')
+
+        function SaveChanges(element) {
+            let sliderId = element.dataset.id;
+            let field = element.id === "title" ? "title" : "description";
+            let newValue = element.innerText.trim()
+
+            fetch(`/edit-slider/${sliderId}`, {
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").getAttribute("content"),
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        [field]: newValue
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log("Update successfully");
+                    } else {
+                        console.log("Error");
+                    }
+                })
+                .catch(error => console.error("ERROR:" + error))
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault()
+                SaveChanges(e.target)
+            }
+        })
+
+        titleElement.addEventListener("blur", function(e) {
+            SaveChanges(titleElement)
+        })
+
+        descriptionElement.addEventListener("blur", function(e) {
+            SaveChanges(descriptionElement)
+        })
+    })
+</script>
