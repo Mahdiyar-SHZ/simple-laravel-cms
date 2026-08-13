@@ -1,12 +1,12 @@
-@php
-$slider = App\Models\Slider::findOrFail(1);
+// @php
+$title = App\Models\Title::find(1);
 $isLoggedIn = auth()->check(); // بررسی اینکه آیا کاربر لاگین کرده یا نه
 @endphp
 
 <div class="lonyo-section-padding2 position-relative">
     <div class="container">
         <div class="lonyo-section-title center">
-            <h2>Features that make spending smarter</h2>
+            <h2 id="feature-title" contenteditable="{{ $isLoggedIn ? 'true' : 'false' }}" data-id="{{ $title?->id }}" >{{ $title?->features }}</h2>
         </div>
         <div class="row">
             <div class="col-xl-4 col-lg-6 col-md-6">
@@ -88,48 +88,47 @@ $isLoggedIn = auth()->check(); // بررسی اینکه آیا کاربر لاگ
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const titleElement = document.getElementById('title')
-        const descriptionElement = document.getElementById('description')
+        const featureElement = document.getElementById('feature-title');
 
         function SaveChanges(element) {
-            let sliderId = element.dataset.id;
-            let field = element.id === "title" ? "title" : "description";
-            let newValue = element.innerText.trim()
+            let featureId = element.dataset.id;
+            let field = "features"; // نام ستون در دیتابیس و کنترلر
+            let newValue = element.innerText.trim();
 
-            fetch(`/edit-slider/${sliderId}`, {
-                    method: "POST",
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").getAttribute("content"),
-                        'Content-type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        [field]: newValue
-                    })
+            fetch(`/edit-feature/${featureId}`, {
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").getAttribute("content"),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    [field]: newValue
                 })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        console.log("Update successfully");
-                    } else {
-                        console.log("Error");
-                    }
-                })
-                .catch(error => console.error("ERROR:" + error))
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Update successfully");
+                } else {
+                    console.log("Error");
+                }
+            })
+            .catch(error => console.error("ERROR:" + error));
         }
 
+        // بررسی اینکه اینتر فقط روی عنصر مدنظر فشرده شود
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault()
-                SaveChanges(e.target)
+            if (e.key === 'Enter' && e.target.id === 'feature-title') {
+                e.preventDefault();
+                e.target.blur(); // فوکوس را برمی‌دارد تا رویداد blur هم تکرار نکند
+                SaveChanges(e.target);
             }
-        })
+        });
 
-        titleElement.addEventListener("blur", function(e) {
-            SaveChanges(titleElement)
-        })
-
-        descriptionElement.addEventListener("blur", function(e) {
-            SaveChanges(descriptionElement)
-        })
-    })
+        if (featureElement) {
+            featureElement.addEventListener("blur", function(e) {
+                SaveChanges(featureElement);
+            });
+        }
+    });
 </script>

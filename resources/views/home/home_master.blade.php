@@ -78,13 +78,13 @@
 
 
 
-@yield('home')
+  @yield('home')
 
 
 
 
   <!-- Footer  -->
-    @include('home.body.footer')
+  @include('home.body.footer')
   <!-- scripts -->
   <script src="{{ asset('frontend/assets/js/jquery-3.7.1.min.js') }}"></script>
   <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -108,6 +108,97 @@
 
   <script src="{{ asset('frontend/assets/js/app.js') }}"></script>
 
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // ==========================================
+      // ۱. مدیریت تایتل نظرات (Review Title)
+      // ==========================================
+      const reviewElement = document.getElementById('reviews-title');
+
+      if (reviewElement) {
+        function SaveReview(element) {
+          let id = element.dataset.id;
+          let newValue = element.innerText.trim();
+
+          fetch(`/edit-reviews/${id}`, {
+              method: "POST",
+              headers: {
+                'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").getAttribute("content"),
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                reviews: newValue // نام ستون دیتابیس برای تایتل ریویو
+              })
+            })
+            .then(res => res.json())
+            .then(data => {
+              if (data.success) console.log("Review title updated successfully");
+            })
+            .catch(error => console.error("ERROR:", error));
+        }
+
+        // رویداد اینتر اختصاصی برای تایتل ریویو
+        reviewElement.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            e.target.blur();
+          }
+        });
+
+        // رویداد blur اختصاصی برای تایتل ریویو
+        reviewElement.addEventListener('blur', function(e) {
+          SaveReview(e.target);
+        });
+      }
+
+
+      // ==========================================
+      // ۲. مدیریت تایتل پاسخ‌ها / سوالات (Answers Title)
+      // ==========================================
+      const answersElement = document.getElementById('answers-title');
+
+      if (answersElement) {
+        function SaveAnswers(element) {
+          let id = element.dataset.id;
+          let newValue = element.innerText.trim();
+
+          fetch(`/edit-answers/${id}`, {
+              method: "POST",
+              headers: {
+                'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").getAttribute("content"),
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                answers: newValue // نام ستون دیتابیس برای پاسخ‌ها
+              })
+            })
+            .then(res => res.json())
+            .then(data => {
+              if (data.success) console.log("Answers updated successfully");
+            })
+            .catch(error => console.error("ERROR:", error));
+        }
+
+        // رویداد اینتر اختصاصی برای پاسخ‌ها
+        answersElement.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            e.target.blur();
+          }
+        });
+
+        // رویداد blur اختصاصی برای پاسخ‌ها
+        answersElement.addEventListener('blur', function(e) {
+          SaveAnswers(e.target);
+        });
+      }
+
+    });
+  </script>
 
 </body>
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-
+use App\Models\Title;
 
 class SliderController extends Controller
 {
@@ -78,6 +78,39 @@ class SliderController extends Controller
 
 
         $slider->save();
+        return response()->json(['success' => true]);
+    }
+
+    public function FeatureUpdate(Request $request,$id){
+        $title = Title::findOrFail($id);
+
+        if($request->has('features')) {
+            $title->features = $request->features;
+        }
+
+        $title->save();
+        return response()->json(['success' => true]);
+    }
+
+    public function AnswersUpdate(Request $request,$id){
+        $title = Title::findOrFail($id);
+
+        if($request->has('answers')) {
+            $title->answers = $request->answers;
+        }
+
+        $title->save();
+        return response()->json(['success' => true]);
+    }
+    
+    public function ReviewsUpdate(Request $request,$id){
+        $title = Title::findOrFail($id);
+
+        if($request->has('reviews')) {
+            $title->reviews = $request->reviews;
+        }
+
+        $title->save();
         return response()->json(['success' => true]);
     }
 }
