@@ -72,6 +72,26 @@
                 </li>
 
 
+                <li>
+                    <a href="#sidebarFeature" data-bs-toggle="collapse">
+                        <i data-feather="alert-octagon"></i>
+                        <span> Features Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <!-- حتماً مطمئن شو کلاس show اینجا نباشد -->
+                    <div class="collapse" id="sidebarFeature">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.features') }}" class="tp-link">All Feature</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.feature') }}" class="tp-link">Add Feature</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
 
                 <li class="menu-title mt-2">General</li>
 

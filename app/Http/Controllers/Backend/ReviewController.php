@@ -50,7 +50,7 @@ class ReviewController extends Controller
         return redirect()->route('all.review')->with($notification);
     }
 
-    public function EditReview(Request $request, $id)
+    public function EditReview($id)
     {
         $review = Review::find($id);
         return view('admin.backend.review.edit_review', compact('review'));
