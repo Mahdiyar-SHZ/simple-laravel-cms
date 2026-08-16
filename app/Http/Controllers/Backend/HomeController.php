@@ -9,6 +9,7 @@ use App\Models\Feature;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\WebpEncoder;
 
 class HomeController extends Controller
 {
@@ -94,10 +95,10 @@ class HomeController extends Controller
         $clarifi = Clarifi::find($clarifi_id);
         if ($request->file('image')) {
             $image = $request->file('image');
-            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            $name_gen = hexdec(uniqid()) . '.' . 'webp';
             $manager = ImageManager::usingDriver(Driver::class);
             $img = $manager->decode($image->getPathname());
-            $img->resize(306, 618)->save(public_path('upload/clarifi/' . $name_gen));
+            $img->resize(306, 618)->encode(new WebpEncoder(80))->save(public_path('upload/clarifi/' . $name_gen));
             $save_url = 'upload/clarifi/' . $name_gen;
 
             if (!empty($clarifi->image) && file_exists(public_path($clarifi->image))) {

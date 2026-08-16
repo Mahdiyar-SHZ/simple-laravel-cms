@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-
+use Intervention\Image\Encoders\WebpEncoder;
 class ReviewController extends Controller
 {
     public function AllReview()
@@ -31,7 +31,7 @@ class ReviewController extends Controller
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             $manager = ImageManager::usingDriver(Driver::class);
             $img = $manager->decode($image->getPathname());
-            $img->resize(60, 60)->save(public_path('upload/review/' . $name_gen));
+            $img->resize(60, 60)->encode(new WebpEncoder(80))->save(public_path('upload/review/' . $name_gen));
             $save_url = 'upload/review/' . $name_gen;
 
             Review::create([
