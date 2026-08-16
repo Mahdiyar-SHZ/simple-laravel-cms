@@ -76,6 +76,14 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/feature/{id}', 'UpdateFeature')->name('update.feature');
             Route::get('/delete/feature/{id}', 'DeleteFeature')->name('delete.feature');
         }
+    );
 
+
+
+    Route::controller(HomeController::class)->group(
+        function () {
+            Route::get('/get/clarifi', 'GetClarifi')->name('get.clarifi');
+            Route::post('/update/clarifi/{id}', 'UpdateClarifi')->name('update.clarifi');
+        }
     );
 });

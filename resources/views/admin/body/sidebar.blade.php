@@ -78,7 +78,6 @@
                         <span> Features Setup </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <!-- حتماً مطمئن شو کلاس show اینجا نباشد -->
                     <div class="collapse" id="sidebarFeature">
                         <ul class="nav-second-level">
                             <li>
@@ -86,6 +85,22 @@
                             </li>
                             <li>
                                 <a href="{{ route('add.feature') }}" class="tp-link">Add Feature</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li>
+                    <a href="#sidebarError" data-bs-toggle="collapse">
+                        <i data-feather="alert-octagon"></i>
+                        <span> Clarifi Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarError">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('get.clarifi') }}" class="tp-link">Get Clarifi</a>
                             </li>
                         </ul>
                     </div>
