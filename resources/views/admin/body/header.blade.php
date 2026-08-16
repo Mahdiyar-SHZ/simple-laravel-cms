@@ -102,7 +102,7 @@
                 <!-- بخش پروفایل کاربر -->
                 <li class="dropdown notification-list topbar-dropdown">
                     <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ (!empty($profileData->photo)) ? url('upload/user_image/' . $profileData->photo) : url('upload/no-image.jpeg') }}" alt="user-image" class="rounded-circle">
+                        <img src="{{ (!empty($profileData->photo)) ? asset($profileData->photo) : asset('upload/no-image.jpeg') }}" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ms-1">
                             {{ $profileData->name }} <i class="mdi mdi-chevron-down"></i>
                         </span>

@@ -92,12 +92,12 @@
 
 
                 <li>
-                    <a href="#sidebarError" data-bs-toggle="collapse">
+                    <a href="#sidebarClarifi" data-bs-toggle="collapse">
                         <i data-feather="alert-octagon"></i>
                         <span> Clarifi Setup </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarError">
+                    <div class="collapse" id="sidebarClarifi">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('get.clarifi') }}" class="tp-link">Get Clarifi</a>

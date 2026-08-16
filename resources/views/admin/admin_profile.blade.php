@@ -24,7 +24,7 @@
 
                         <div class="align-items-center">
                             <div class="d-flex align-items-center">
-                                <img src="{{ (!empty($profileData->photo)) ? url('upload/user_image/' . $profileData->photo) : url('upload/no-image.jpeg') }}" class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile">
+                                <img src="{{ (!empty($profileData->photo)) ? asset($profileData->photo) : asset('upload/no-image.jpeg') }}" class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile">
 
 
                                 <div class="overflow-hidden ms-4">
@@ -107,7 +107,7 @@
                                                     <div class="form-group mb-3 row">
                                                         <label class="form-label"></label>
                                                         <div class="col-lg-12 col-xl-12">
-                                                            <img src="{{ (!empty($profileData->photo)) ? url('upload/user_image/' . $profileData->photo) : url('upload/no-image.jpeg') }}" class="rounded-circle avatar-xxl img-thumbnail float-start" id="showImage" alt="image profile">
+                                                            <img src="{{ (!empty($profileData->photo)) ? asset($profileData->photo) : url('upload/no-image.jpeg') }}" class="rounded-circle avatar-xxl img-thumbnail float-start" id="showImage" alt="image profile">
                                                         </div>
                                                     </div>
 

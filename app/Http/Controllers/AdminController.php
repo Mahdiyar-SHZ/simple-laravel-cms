@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\VerificationCodeMail;
 use Illuminate\Http\Resources\JsonApi\RelationResolver;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\WebpEncoder;
 
 class AdminController extends Controller
 {
@@ -83,18 +86,23 @@ class AdminController extends Controller
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('upload/user_image'), $filename);
+            $filename = time() . '.webp';
 
-            $data->photo = $filename;
-            if ($oldPhotoPath && $oldPhotoPath !== $filename) {
-                $this->deleteOldImage($oldPhotoPath);
+            $manager = ImageManager::usingDriver(Driver::class);
+            $img = $manager->decode($file->getPathname()); 
+
+            $img->encode(new WebpEncoder(80))->save(public_path('upload/user_image/' . $filename));
+
+            $data->photo = 'upload/user_image/' . $filename;
+
+            if ($oldPhotoPath && file_exists(public_path($oldPhotoPath))) {
+                unlink(public_path($oldPhotoPath));
             }
         }
 
-        
+
         $data->save();
-        
+
         $notification = array(
             'message' => 'profile updated successfully',
             'alert-type' => 'success'
@@ -114,7 +122,8 @@ class AdminController extends Controller
         }
     }
 
-    public function ChangePassword(Request $request){
+    public function ChangePassword(Request $request)
+    {
         $id = Auth::user()->id;
         $data = User::find($id);
 
@@ -123,7 +132,7 @@ class AdminController extends Controller
             'new_password' => 'required|confirmed',
         ]);
 
-        if(!Hash::check($request->old_password, $data->password)){
+        if (!Hash::check($request->old_password, $data->password)) {
             $notification = array(
                 'message' => 'رمز عبور فعلی اشتباه است',
                 'alert-type' => 'error'
@@ -131,15 +140,15 @@ class AdminController extends Controller
             return back()->with($notification);
         }
         User::whereId($id)->update([
-        'password' => Hash::make($request->new_password)
-    ]);
+            'password' => Hash::make($request->new_password)
+        ]);
 
         $data->save();
         Auth::logout();
         $notification = array(
-                'message' => 'رمز با موفقت تغییر کرد!',
-                'alert-type' => 'success'
-            );
+            'message' => 'رمز با موفقت تغییر کرد!',
+            'alert-type' => 'success'
+        );
         return redirect()->route('login')->with($notification);
     }
 }
