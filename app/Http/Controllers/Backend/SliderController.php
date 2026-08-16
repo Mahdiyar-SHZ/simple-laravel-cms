@@ -24,7 +24,7 @@ class SliderController extends Controller
         $slider = Slider::find($slider_id);
         if ($request->file('image')) {
             $image = $request->file('image');
-            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            $name_gen = hexdec(uniqid()) . '.' . 'webp';
             $manager = ImageManager::usingDriver(Driver::class);
             $img = $manager->decode($image->getPathname());
             $img->resize(306, 618)->encode(new WebpEncoder(80))->save(public_path('upload/slider/' . $name_gen));
