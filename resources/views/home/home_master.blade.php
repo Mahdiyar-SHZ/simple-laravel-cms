@@ -197,6 +197,50 @@
         });
       }
 
+
+
+
+      // ==========================================
+      // 3. مدیریت تایتل پاسخ‌ها / سوالات (Answers Title)
+      // ==========================================
+      const editableElements = document.querySelectorAll('.connect-title, .editable-description');
+
+      function SaveConnect(element) {
+        let id = element.dataset.id;
+        let column = element.dataset.column;
+        let newValue = element.innerText.trim();
+
+        fetch(`/edit-connect/${id}`, {
+            method: "POST",
+            headers: {
+              'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").getAttribute("content"),
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+            column: column,
+            value: newValue 
+        })
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) console.log("Connect updated successfully");
+          })
+          .catch(error => console.error("ERROR:", error));
+      }
+
+      // استفاده از حلقه برای اعمال رویدادها روی تمام آیتم‌ها
+      editableElements.forEach(element => {
+        element.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            e.target.blur();
+          }
+        });
+
+        element.addEventListener('blur', function(e) {
+          SaveConnect(e.target);
+        });
+      });
     });
   </script>
 

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Clarifi;
+use App\Models\Connect;
 use Illuminate\Http\Request;
 use App\Models\Feature;
+use App\Models\Usability;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -131,5 +133,105 @@ class HomeController extends Controller
 
             return redirect()->back()->with($notification);
         }
+    }
+
+
+    public function GetUsability()
+    {
+        $usability = Usability::findOrFail(1);
+        return view('admin.backend.usability.get_usability', compact('usability'));
+    }
+
+    public function UpdateUsability(Request $request)
+    {
+        $usability = Usability::findOrFail(1);
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()) . '.' . 'webp';
+            $manager = ImageManager::usingDriver(Driver::class);
+            $img = $manager->decode($image->getPathname());
+            $img->resize(560, 400)->encode(new WebpEncoder(80))->save(public_path('upload/usability/' . $name_gen));
+            $save_url = 'upload/usability/' . $name_gen;
+
+            if (!empty($usability->image) && file_exists(public_path($usability->image))) {
+                unlink(public_path($usability->image));
+            }
+
+            $usability->update([
+                'title' => $request->title,
+                'link' => $request->link,
+                'description' => $request->description,
+                'youtube' => $request->youtube,
+                'image' => $save_url,
+            ]);
+        }
+        $usability->update([
+            'title' => $request->title,
+            'link' => $request->link,
+            'description' => $request->description,
+            'youtube' => $request->youtube,
+        ]);
+
+
+        $notification = array(
+            'message' => 'Usability Updated without image successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function AllConnect()
+    {
+        $connect = Connect::latest()->get();
+        return view('admin.backend.connect.all_connect', compact('connect'));
+    }
+    public function AddConnect()
+    {
+        return view('admin.backend.connect.add_connect');
+    }
+
+    public function StoreConnect(Request $request)
+    {
+        Connect::create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        $notification = array(
+            'message' => 'Connect Inserted successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.connect')->with($notification);
+    }
+
+    public function DeleteConnect($id)
+    {
+        Connect::findOrFail($id)->delete();
+        $notification = array(
+            'message' => 'Connect Deleted successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.connect')->with($notification);
+    }
+
+    public function EditConnect(Request $request, $id)
+    {
+        $connect = Connect::findOrFail($id);
+
+        $column = $request->input('column');
+        $value = $request->input('value');
+
+        if ($column && in_array($column, ['title', 'description'])) {
+            $connect->$column = $value;
+            $connect->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Invalid column'], 400);
     }
 }

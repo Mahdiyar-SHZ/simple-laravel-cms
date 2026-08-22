@@ -1,7 +1,7 @@
-// @php
+@php
 $title = App\Models\Title::find(1);
 $feature = App\Models\Feature::all();
-$isLoggedIn = auth()->check(); // بررسی اینکه آیا کاربر لاگین کرده یا نه
+$isLoggedIn = auth()->check(); 
 @endphp
 
 <div class="lonyo-section-padding2 position-relative">

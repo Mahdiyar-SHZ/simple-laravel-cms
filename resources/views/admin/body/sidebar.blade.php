@@ -107,6 +107,42 @@
                 </li>
 
 
+                <li>
+                    <a href="#sidebarUsability" data-bs-toggle="collapse">
+                        <i data-feather="alert-octagon"></i>
+                        <span> Usability Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarUsability">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('get.usability') }}" class="tp-link">Get Usability</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li>
+                    <a href="#sidebarConnetct" data-bs-toggle="collapse">
+                        <i data-feather="alert-octagon"></i>
+                        <span> Connetct Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarConnetct">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.connect') }}" class="tp-link">All Connetct</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.connect') }}" class="tp-link">Add Connetct</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
 
                 <li class="menu-title mt-2">General</li>
 

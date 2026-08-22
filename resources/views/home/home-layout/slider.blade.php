@@ -9,7 +9,6 @@ $isLoggedIn = auth()->check(); // بررسی اینکه آیا کاربر لاگ
             <div class="col-lg-7 d-flex align-items-center">
                 <div class="lonyo-hero-content" data-aos="fade-up" data-aos-duration="700">
 
-                    <!-- ۱. عنوان اصلی (H1) -->
                     <h1 contenteditable="{{ $isLoggedIn ? 'true' : 'false' }}"
                         class="editable-field"
                         id="title"
@@ -18,7 +17,6 @@ $isLoggedIn = auth()->check(); // بررسی اینکه آیا کاربر لاگ
                         {{ $slider->title }}
                     </h1>
 
-                    <!-- ۲. توضیحات (Paragraph) -->
                     <p contenteditable="{{ $isLoggedIn ? 'true' : 'false' }}"
                         class="text editable-field"
                         id="description"
@@ -28,7 +26,6 @@ $isLoggedIn = auth()->check(); // بررسی اینکه آیا کاربر لاگ
                     </p>
 
                     <div class="mt-50" data-aos="fade-up" data-aos-duration="900">
-                        <!-- ۳. متن دکمه (Button Text) -->
                         <a href="{{ route('register') }}"
                             contenteditable="{{ $isLoggedIn ? 'true' : 'false' }}"
                             id="btn"
