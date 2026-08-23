@@ -144,6 +144,26 @@
 
 
 
+                <li>
+                    <a href="#sidebarFaq" data-bs-toggle="collapse">
+                        <i data-feather="alert-octagon"></i>
+                        <span> Faq Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarFaq">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.faq') }}" class="tp-link">All Faq</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.faq') }}" class="tp-link">Add Faq</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+
                 <li class="menu-title mt-2">General</li>
 
                 <li>
