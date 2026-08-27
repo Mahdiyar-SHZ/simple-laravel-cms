@@ -1,17 +1,21 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\TeamController;
 use App\Models\Review;
 
 Route::get('/', function () {
     $reviews = Review::latest()->get();
     return view('home.index', compact('reviews'));
 });
+
+Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');
 
 Route::get('/dashboard', function () {
     return view('admin.index');
@@ -112,6 +116,26 @@ Route::middleware('auth')->group(function () {
             Route::get('/delete/faq/{id}', 'DeleteFaq')->name('delete.faq');
             Route::get('/edit/faq/{id}', 'EditFaq')->name('edit.faq');
             Route::post('/update/faq/{id}', 'UpdateFaq')->name('update.faq');
+        }
+    );
+
+
+    Route::controller(HomeController::class)->group(
+        function () {
+            Route::post('/edit-app/{id}', 'EditApp');
+            Route::post('/update-app-image/{id}', 'EditAppImage');
+        }
+    );
+
+
+    Route::controller(TeamController::class)->group(
+        function () {
+            Route::get('/all/team', 'AllTeam')->name('all.team');
+            Route::get('/add/team', 'AddTeam')->name('add.team');
+            Route::get('/edit/team/{id}', 'EditTeam')->name('edit.team');
+            Route::get('/delete/team/{id}', 'DeleteTeam')->name('delete.team');
+            Route::post('/store/team', 'StoreTeam')->name('store.team');
+            Route::post('/update/team/{id}', 'UpdateTeam')->name('update.team');
         }
     );
 });

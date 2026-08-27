@@ -30,9 +30,11 @@ class SliderController extends Controller
             $img->resize(306, 618)->encode(new WebpEncoder(80))->save(public_path('upload/slider/' . $name_gen));
             $save_url = 'upload/slider/' . $name_gen;
 
-            if (file_exists(public_path($slider->image))) {
-                unlink($slider->image);
+            if ($slider->image && file_exists(public_path($slider->image))) {
+                unlink(public_path($slider->image));
             }
+
+            
 
             $slider->update([
                 'title' => $request->title,
@@ -64,15 +66,15 @@ class SliderController extends Controller
         }
     }
 
-    public function ElementUpdate(Request $request,$id)
+    public function ElementUpdate(Request $request, $id)
     {
         $slider = Slider::findOrFail($id);
 
-        if($request->has('title')) {
+        if ($request->has('title')) {
             $slider->title = $request->title;
         }
 
-        if($request->has('descriptin')) {
+        if ($request->has('descriptin')) {
             $slider->descriptin = $request->descriptin;
         }
 
@@ -82,10 +84,11 @@ class SliderController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function FeatureUpdate(Request $request,$id){
+    public function FeatureUpdate(Request $request, $id)
+    {
         $title = Title::findOrFail($id);
 
-        if($request->has('features')) {
+        if ($request->has('features')) {
             $title->features = $request->features;
         }
 
@@ -93,21 +96,23 @@ class SliderController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function AnswersUpdate(Request $request,$id){
+    public function AnswersUpdate(Request $request, $id)
+    {
         $title = Title::findOrFail($id);
 
-        if($request->has('answers')) {
+        if ($request->has('answers')) {
             $title->answers = $request->answers;
         }
 
         $title->save();
         return response()->json(['success' => true]);
     }
-    
-    public function ReviewsUpdate(Request $request,$id){
+
+    public function ReviewsUpdate(Request $request, $id)
+    {
         $title = Title::findOrFail($id);
 
-        if($request->has('reviews')) {
+        if ($request->has('reviews')) {
             $title->reviews = $request->reviews;
         }
 

@@ -1,6 +1,6 @@
 @php
 $slider = App\Models\Slider::findOrFail(1);
-$isLoggedIn = auth()->check(); // بررسی اینکه آیا کاربر لاگین کرده یا نه
+$isLoggedIn = auth()->check();
 @endphp
 
 <div class="lonyo-hero-section light-bg">

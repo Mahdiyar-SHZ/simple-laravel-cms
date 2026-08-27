@@ -95,6 +95,7 @@
 
     <!-- Datatables js -->
     <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
 
     <!-- dataTables.bootstrap5 -->
     <script src="{{ asset('backend/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>

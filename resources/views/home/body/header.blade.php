@@ -4,9 +4,7 @@
             <div class="col-8 col-sm-auto ">
                 <div class="header-logo1 ">
                     <a href="index.html">
-                        <img src="{{ asset('frontend/assets/images/logo/logo-dark.svg
-                        
-                        ') }}" alt="logo">
+                        <img src="{{ asset('frontend/assets/images/logo/logo-dark.svg') }}" alt="logo">
                     </a>
                 </div>
             </div>
@@ -15,7 +13,7 @@
                     <nav class="main-menu menu-style1 d-none d-lg-block menu-left">
                         <ul>
                             <li>
-                                <a href="contact-us.html">Home</a>
+                                <a href="/">Home</a>
                             </li>
 
                             <li class="menu-item-has-children">
@@ -27,7 +25,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="index-02.html">
+                                        <a href="{{ route('our.team') }}">
                                             Team
                                         </a>
                                     </li>

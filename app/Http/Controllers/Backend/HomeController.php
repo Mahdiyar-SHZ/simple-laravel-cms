@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Clarifi;
 use App\Models\Connect;
 use App\Models\Faq;
+use App\Models\App;
 use Illuminate\Http\Request;
 use App\Models\Feature;
 use App\Models\Usability;
@@ -293,5 +294,42 @@ class HomeController extends Controller
         );
 
         return redirect()->route('all.faq')->with($notification);
+    }
+
+
+    public function EditApp(Request $request, $id)
+    {
+        $app = App::findOrFail($id);
+
+        $app->update($request->only('title', 'description'));
+
+        return response()->json(['success' => true, 'message' => 'Update Successfully']);
+    }
+
+
+    public function EditAppImage(Request $request, $id)
+    {
+        $app = App::findOrFail($id);
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()) . '.' . 'webp';
+            $manager = ImageManager::usingDriver(Driver::class);
+            $img = $manager->decode($image->getPathname());
+            $img->resize(306, 481)->encode(new WebpEncoder(80))->save(public_path('upload/apps/' . $name_gen));
+            $save_url = 'upload/apps/' . $name_gen;
+
+            if (!empty($app->image) && file_exists(public_path($app->image))) {
+                unlink(public_path($app->image));
+            }
+
+            $app->update([
+                'image' => $save_url
+            ]);
+
+        return response()->json(['success' => true, 'image_url' => asset($save_url) , 'message' => 'Update Image Successfully']);
+
+        }
+
+        return response()->json(['success' => false , 'message' => 'Update Image Failed'], 400);
     }
 }

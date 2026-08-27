@@ -118,7 +118,7 @@
                             <li>
                                 <a href="{{ route('get.usability') }}" class="tp-link">Get Usability</a>
                             </li>
-                            
+
                         </ul>
                     </div>
                 </li>
@@ -162,7 +162,23 @@
                     </div>
                 </li>
 
-
+                <li>
+                    <a href="#sidebarTeam" data-bs-toggle="collapse">
+                        <i data-feather="alert-octagon"></i>
+                        <span> Team Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarTeam">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.team') }}" class="tp-link">All Team</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.team') }}" class="tp-link">Add Team</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li class="menu-title mt-2">General</li>
 
