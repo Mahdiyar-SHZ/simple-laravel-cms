@@ -20,7 +20,7 @@
                                 <a href="">About Us</a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="index.html">
+                                        <a href="{{ route('about.us') }}">
                                             Company Profile
                                         </a>
                                     </li>

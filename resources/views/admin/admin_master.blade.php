@@ -93,13 +93,23 @@
     <script src="{{ asset('backend/assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/feather-icons/feather.min.js') }}"></script>
 
+    <!-- Quill Editor Js -->
+    <script src="{{ asset('backend/assets/libs/quill/quill.core.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/quill/quill.min.js') }}"></script>
+
     <!-- Datatables js -->
     <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
-
+    <!-- Quill Demo Js -->
+    <script src="{{ asset('backend/assets/js/pages/quilljs.init.js') }}"></script>
     <!-- dataTables.bootstrap5 -->
     <script src="{{ asset('backend/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+
+    <!-- Quill css -->
+    <link href="{{ asset('backend/assets/libs/quill/quill.core.js') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/libs/quill/quill.bubble.cs') }}s" rel="stylesheet" type="text/css" />
 
     <!-- Apexcharts JS -->
     <script src="{{ asset('backend/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
@@ -120,7 +130,7 @@
     <!-- Datatable Demo App Js -->
     <script src="{{ asset('backend/assets/js/pages/datatable.init.js') }}"></script>
 
-    @if(Session::has('message')) 
+    @if(Session::has('message'))
     <script>
         var type = "{{ Session::get('alert-type', 'success') }}";
         switch (type) {

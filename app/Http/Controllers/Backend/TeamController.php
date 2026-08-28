@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Encoders\WebpEncoder;
-
+use App\Models\About;
 class TeamController extends Controller
 {
     public function AllTeam()
@@ -119,5 +119,52 @@ class TeamController extends Controller
         );
 
         return redirect()->route('all.team')->with($notification);
+    }
+
+
+    public function GetAboutUs(){
+        $about = About::findOrFail(1);
+        return view('admin.backend.about.get_about', compact('about'));
+    }
+
+    public function UpdateAboutUs(Request $request,$id ){
+        $about = About::findOrFail($id);
+
+        if ($request->file('image')) {
+
+            if ($about->image && file_exists(public_path($about->image))) {
+                unlink(public_path($about->image));
+            }
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()) . '.' . 'webp';
+            $manager = ImageManager::usingDriver(Driver::class);
+            $img = $manager->decode($image->getPathname());
+            $img->resize(526, 550)->encode(new WebpEncoder(80))->save(public_path('upload/about/' . $name_gen));
+            $save_url = 'upload/about/' . $name_gen;
+
+            $about->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'image' => $save_url,
+            ]);
+            $notification = array(
+                'message' => 'About Updated successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('get.about')->with($notification);
+        }
+
+        $about->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        $notification = array(
+            'message' => 'About Updated successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('get.about')->with($notification);
     }
 }

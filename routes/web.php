@@ -15,7 +15,9 @@ Route::get('/', function () {
     return view('home.index', compact('reviews'));
 });
 
+
 Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');
+Route::get('/about-us', [FrontendController::class, 'AboutUs'])->name('about.us');
 
 Route::get('/dashboard', function () {
     return view('admin.index');
@@ -136,6 +138,23 @@ Route::middleware('auth')->group(function () {
             Route::get('/delete/team/{id}', 'DeleteTeam')->name('delete.team');
             Route::post('/store/team', 'StoreTeam')->name('store.team');
             Route::post('/update/team/{id}', 'UpdateTeam')->name('update.team');
+        }
+    );
+
+
+
+    Route::controller(TeamController::class)->group(
+        function () {
+            Route::get('/get/about-us', 'GetAboutUs')->name('get.about');
+            Route::post('/update/about-us/{id}', 'UpdateAboutUs')->name('update.about');
+        }
+    );
+
+
+
+    Route::controller(TeamController::class)->group(
+        function () {
+            Route::post('/edit-record/{id}', 'UpdateRecord')->name('update.record');
         }
     );
 });
