@@ -199,6 +199,38 @@
                 <li class="menu-title mt-2">General</li>
 
                 <li>
+                    <a href="#sidebarBlogcat" data-bs-toggle="collapse">
+                        <i data-feather="package"></i>
+                        <span> Blog category Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarBlogcat">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.blog.category') }}" class="tp-link">Blog Category</a>
+                            </li>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#sidebarBlogpost" data-bs-toggle="collapse">
+                        <i data-feather="package"></i>
+                        <span> Blog Post Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarBlogpost">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.blog.post') }}" class="tp-link">All Blog Post</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('add.blog.post') }}" class="tp-link">Add Blog Post</a>
+                            </li>
+                    </div>
+                </li>
+
+                <li>
                     <a href="#sidebarBaseui" data-bs-toggle="collapse">
                         <i data-feather="package"></i>
                         <span> Components </span>

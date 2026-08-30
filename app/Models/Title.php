@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Title extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'features',
+        'reviews',
+        'answers',
+        'record',
+        'card',
+        'card_title',
+        'card_desc'
+    ];
 }

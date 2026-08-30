@@ -12,7 +12,7 @@ use App\Models\Title;
 
 class SliderController extends Controller
 {
-    public function GetSlider(Request $request)
+    public function GetSlider()
     {
         $slider = Slider::find(1);
         return view('admin.backend.slider.get_slider', compact('slider'));

@@ -8,6 +8,10 @@ use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\TeamController;
+use App\Http\Controllers\Backend\AboutSectionController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Models\About;
+
 use App\Models\Review;
 
 Route::get('/', function () {
@@ -155,6 +159,36 @@ Route::middleware('auth')->group(function () {
     Route::controller(TeamController::class)->group(
         function () {
             Route::post('/edit-record/{id}', 'UpdateRecord')->name('update.record');
+        }
+    );
+
+
+    Route::controller(AboutSectionController::class)->group(
+        function () {
+            Route::post('/edit-record/{id}', [AboutSectionController::class, 'updateRecord']);
+        }
+    );
+
+
+    Route::controller(BlogController::class)->group(
+        function () {
+            Route::get('/blog/category', 'BlogCategory')->name('all.blog.category');
+            Route::get('/blog/category/delete/{id}', 'DeleteBlogCategory')->name('delete.blog.category');
+            Route::post('/blog/category/store', 'StoreBlogCategory')->name('store.blog.category');
+            Route::get('/blog/category/edit/{id}', 'EditBlogCategory')->name('edit.blog.category');
+            Route::post('/blog/category/update/{id}', 'UpdateBlogCategory')->name('update.blog.category');
+            
+        }
+    );
+
+    Route::controller(BlogController::class)->group(
+        function () {
+            Route::get('/blog/posts', 'AllBlogPost')->name('all.blog.post');
+            Route::get('/add/blog/post', 'AddBlogPost')->name('add.blog.post');
+            Route::get('/delete/blog/post/{id}', 'DeleteBlogPost')->name('delete.blog.post');
+            Route::get('/edit/blog/post/{id}', 'EditBlogPost')->name('edit.blog.post');
+            Route::post('/store/blog/post', 'StoreBlogPost')->name('store.blog.post');
+            Route::post('/update/blog/post/{id}', 'UpdateBlogPost')->name('update.blog.post');
         }
     );
 });
