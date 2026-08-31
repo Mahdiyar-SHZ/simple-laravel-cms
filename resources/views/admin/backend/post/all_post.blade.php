@@ -39,7 +39,8 @@
                             <td>{{ $item->blogcat?->category_name }}</td>
                             <td>{{ $item->blog_title }}</td>
                             <td><img src="{{ asset($item->blog_image) }}" style="width: 70px; height:40px ;" alt=""></td>
-                            <td>{!!  Str::limit($item->blog_content,50,'...')  !!}</td>
+                            <td>{{ Str::limit(strip_tags(html_entity_decode($item->blog_content)), 50, '...') }}</td>
+                            
                             <td>
                                 <a href="{{ route('edit.blog.post', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
                                 <a href="{{ route('delete.blog.post', $item->id) }}" class="btn btn-danger btn-sm">Delete</a>

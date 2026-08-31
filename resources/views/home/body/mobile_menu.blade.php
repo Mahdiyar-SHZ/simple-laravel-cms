@@ -33,16 +33,16 @@
                     </ul>
                 </li>
 
-                <li>
+                <!-- <li>
                     <a href="contact-us.html">Our Servece</a>
-                </li>
+                </li> -->
 
                 <li>
                     <a href="contact-us.html">Portfilio</a>
                 </li>
 
                 <li>
-                    <a href="contact-us.html">Blog</a>
+                    <a href="{{ route('blog.page') }}">Blog</a>
                 </li>
 
                 <li>

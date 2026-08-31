@@ -22,6 +22,12 @@ Route::get('/', function () {
 
 Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');
 Route::get('/about-us', [FrontendController::class, 'AboutUs'])->name('about.us');
+Route::get('/blog', [FrontendController::class, 'BlogPage'])->name('blog.page');
+Route::get('/blog/detail/{slug}', [ FrontendController::class, 'DetailBlogPost'])->name('detail.blog.post');
+Route::get('/blog/category/{id}', [ FrontendController::class, 'BlogCategory'])->name('blog.category.l');
+
+
+
 
 Route::get('/dashboard', function () {
     return view('admin.index');
@@ -177,7 +183,6 @@ Route::middleware('auth')->group(function () {
             Route::post('/blog/category/store', 'StoreBlogCategory')->name('store.blog.category');
             Route::get('/blog/category/edit/{id}', 'EditBlogCategory')->name('edit.blog.category');
             Route::post('/blog/category/update/{id}', 'UpdateBlogCategory')->name('update.blog.category');
-            
         }
     );
 
