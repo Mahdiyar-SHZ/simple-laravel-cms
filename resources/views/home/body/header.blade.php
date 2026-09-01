@@ -45,7 +45,7 @@
                             </li>
 
                             <li>
-                                <a href="contact-us.html">Contact</a>
+                                <a href="{{ route('contact.us') }}">Contact</a>
                             </li>
 
                         </ul>

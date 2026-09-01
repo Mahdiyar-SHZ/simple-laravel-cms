@@ -1,6 +1,10 @@
 @extends('home.home_master')
 @section('home')
-
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
 <div class="breadcrumb-wrapper light-bg">
     <div class="container">
         <div class="breadcrumb-content">
@@ -89,64 +93,33 @@
                         </div>
                     </div>
                     <div class="lonyo-blog-d-comment-box">
-                        <h4>Comments:</h4>
-                        <div class="lonyo-blog-d-comment-wrap1">
-                            <div class="lonyo-blog-d-comment-thumb">
-                                <img src="{{ asset('frontend/assets/images/blog/b8.png') }}" alt="">
+                        <h4>Comments: ({{ $comments->count() }})</h4>
+
+                        @foreach ($comments as $comment)
+                        <div class="lonyo-blog-d-comment-wrap1 d-flex align-items-start gap-3 mb-4">
+                            <div class="lonyo-blog-d-comment-thumb flex-shrink-0">
+                                <img src="{{ asset($comment->user?->photo ?? 'upload/no-image.jpeg') }}"
+                                    style="width: 80px; height: 80px; object-fit: cover;"
+                                    alt="{{ $comment->user?->name }}">
                             </div>
-                            <div class="lonyo-blog-d-comment-data1">
-                                <h5>Vicky Smith</h5>
-                                <span>June 21, 2025</span>
-                                <p>After reading the blog, I understand personal finance is exigent. Personal finance isn't just a way to track your spending.</p>
-                            </div>
-                            <div class="reply-btn">
-                                <a href="single-blog.html">Reply</a>
-                            </div>
-                        </div>
-                        <div class="lonyo-blog-d-comment-wrap pl-101">
-                            <div class="lonyo-blog-d-comment-thumb">
-                                <img src="{{ asset('frontend/assets/images/blog/b9.png') }}" alt="">
-                            </div>
-                            <div class="lonyo-blog-d-comment-data">
-                                <h5>Adam Mac</h5>
-                                <span>September 22, 2025</span>
-                                <p>It's a tool to secure financial future, helping consumers track spending, pay bills, budgets and create savings.</p>
-                            </div>
-                            <div class="reply-btn">
-                                <a href="single-blog.html">Reply</a>
+                            <div class="lonyo-blog-d-comment-data1 flex-grow-1">
+                                <h5>{{ $comment->user?->name ?? 'unknown user' }}</h5>
+                                <span>{{ $comment->created_at->format('M d Y') }}</span>
+                                <p>{{ $comment->comment }}</p>
                             </div>
                         </div>
-                        <div class="lonyo-blog-d-comment-wrap1 wrap2">
-                            <div class="lonyo-blog-d-comment-thumb">
-                                <img src="{{ asset('frontend/assets/images/blog/b10.png') }}" alt="">
-                            </div>
-                            <div class="lonyo-blog-d-comment-data1">
-                                <h5>William Thomas</h5>
-                                <span>June 21, 2025</span>
-                                <p>Yes exactly! Personal finance software gives a clear picture of your situation by effortlessly organizing & tracking expenses.</p>
-                            </div>
-                            <div class="reply-btn">
-                                <a href="single-blog.html">Reply</a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="lonyo-blog-d-comment-box2" data-aos="fade-up" data-aos-duration="700">
                         <h4>Leave a comments:</h4>
                         <div class="lonyo-contact-box">
-                            <form action="#">
-                                <div class="lonyo-main-field">
-                                    <p>Full name*</p>
-                                    <input type="text" placeholder="Enter your name">
-                                </div>
-                                <div class="lonyo-main-field">
-                                    <p>Email address*</p>
-                                    <input type="email" placeholder="Your email address">
-                                </div>
+                            <form action="{{ route('comment.store' , $blog->id) }}" method="post">
+                                @csrf
                                 <p>Message</p>
                                 <div class="lonyo-main-field-textarea">
-                                    <textarea class="button-text" name="textarea" placeholder="Write your message here..."></textarea>
+                                    <textarea class="button-text" name="comment" placeholder="Write your message here..."></textarea>
                                 </div>
-                                <button class="lonyo-default-btn extra-btn d-block" type="button">Submit A Comment</button>
+                                <button class="lonyo-default-btn extra-btn d-block" type="submit">Submit A Comment</button>
                             </form>
                         </div>
                     </div>
@@ -268,5 +241,25 @@
     </div>
 </div>
 <!-- end blog -->
+
+@if(Session::has('message'))
+<script>
+    var type = "{{ Session::get('alert-type', 'success') }}";
+    switch (type) {
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+</script>
+@endif
 
 @endsection

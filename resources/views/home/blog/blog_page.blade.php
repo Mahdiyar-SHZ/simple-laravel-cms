@@ -113,10 +113,8 @@
     </div>
 </div>
 <!-- end blog -->
-<div class="lonyo-content-shape">
-    <img src="{{ asset('frontend/assets/images/shape/shape2.svg') }}" alt="">
-</div>
 
-@include('home.home-layout.money-management')
+
+
 <!-- end cta -->
 @endsection

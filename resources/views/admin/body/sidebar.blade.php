@@ -231,6 +231,20 @@
                 </li>
 
                 <li>
+                    <a href="#sidebarContact-Message" data-bs-toggle="collapse">
+                        <i data-feather="package"></i>
+                        <span> Contact Message </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarContact-Message">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.contact.message') }}" class="tp-link">All Contact Message</a>
+                            </li>
+                    </div>
+                </li>
+
+                <li>
                     <a href="#sidebarBaseui" data-bs-toggle="collapse">
                         <i data-feather="package"></i>
                         <span> Components </span>

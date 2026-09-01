@@ -80,7 +80,9 @@
 
   @yield('home')
 
+  @include('home.home-layout.faq')
 
+  @include('home.home-layout.money-management')
 
 
   <!-- Footer  -->
@@ -217,9 +219,9 @@
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-            column: column,
-            value: newValue 
-        })
+              column: column,
+              value: newValue
+            })
           })
           .then(res => res.json())
           .then(data => {
@@ -243,6 +245,26 @@
       });
     });
   </script>
+
+  @if(Session::has('message'))
+  <script>
+    var type = "{{ Session::get('alert-type', 'success') }}";
+    switch (type) {
+      case 'info':
+        toastr.info("{{ Session::get('message') }}");
+        break;
+      case 'success':
+        toastr.success("{{ Session::get('message') }}");
+        break;
+      case 'warning':
+        toastr.warning("{{ Session::get('message') }}");
+        break;
+      case 'error':
+        toastr.error("{{ Session::get('message') }}");
+        break;
+    }
+  </script>
+  @endif
 
 </body>
 

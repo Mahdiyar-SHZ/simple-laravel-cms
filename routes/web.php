@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\Backend\AboutSectionController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Models\About;
 
 use App\Models\Review;
@@ -23,8 +24,12 @@ Route::get('/', function () {
 Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');
 Route::get('/about-us', [FrontendController::class, 'AboutUs'])->name('about.us');
 Route::get('/blog', [FrontendController::class, 'BlogPage'])->name('blog.page');
-Route::get('/blog/detail/{slug}', [ FrontendController::class, 'DetailBlogPost'])->name('detail.blog.post');
-Route::get('/blog/category/{id}', [ FrontendController::class, 'BlogCategory'])->name('blog.category.l');
+Route::get('/blog/detail/{slug}', [FrontendController::class, 'DetailBlogPost'])->name('detail.blog.post');
+Route::get('/blog/category/{id}', [FrontendController::class, 'BlogCategory'])->name('blog.category.l');
+Route::get('/contact-us', [FrontendController::class, 'ContactUs'])->name('contact.us');
+Route::post('/contact-message', [FrontendController::class, 'SendContactUs'])->name('contact.message');
+
+
 
 
 
@@ -196,4 +201,11 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/blog/post/{id}', 'UpdateBlogPost')->name('update.blog.post');
         }
     );
+
+    Route::post('/comment/store/{blogId}', [CommentController::class, 'StoreComment'])
+        ->name('comment.store');
+
+    Route::get('/contacts', [FrontendController::class, 'Contacts'])->name('all.contact.message');
+    Route::get('/contact/view/{id}', [FrontendController::class, 'ViewContact'])->name('view.contact.message');
+    Route::get('/contact/delete/{id}', [FrontendController::class, 'DelteContact'])->name('delete.contact.message');
 });

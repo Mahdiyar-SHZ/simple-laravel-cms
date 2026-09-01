@@ -2,6 +2,7 @@
 $apps = App\Models\App::findOrFail(1);
 $isLoggedIn = auth()->check();
 @endphp
+
 <section class="lonyo-cta-section bg-heading">
     <div class="container">
         <div class="row">
