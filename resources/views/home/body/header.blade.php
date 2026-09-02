@@ -17,7 +17,7 @@
                             </li>
 
                             <li class="menu-item-has-children">
-                                <a href="">About Us</a>
+                                <a href="{{ route('about.us') }}">About Us</a>
                                 <ul class="sub-menu">
                                     <li>
                                         <a href="{{ route('about.us') }}">
@@ -32,13 +32,6 @@
                                 </ul>
                             </li>
 
-                            <!-- <li>
-                                <a href="contact-us.html">Our Servece</a>
-                            </li> -->
-
-                            <li>
-                                <a href="contact-us.html">Portfilio</a>
-                            </li>
 
                             <li>
                                 <a href="{{ route('blog.page') }}">Blog</a>

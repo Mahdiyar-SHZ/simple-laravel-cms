@@ -18,10 +18,10 @@
                 </li>
 
                 <li class="menu-item-has-children">
-                    <a href="">About Us</a>
+                    <a href="{{ route('about.us') }}">About Us</a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="index.html">
+                            <a href="{{ route('our.team') }}">
                                 Company Profile
                             </a>
                         </li>
@@ -33,26 +33,14 @@
                     </ul>
                 </li>
 
-                <!-- <li>
-                    <a href="contact-us.html">Our Servece</a>
-                </li> -->
-
-                <li>
-                    <a href="contact-us.html">Portfilio</a>
-                </li>
-
                 <li>
                     <a href="{{ route('blog.page') }}">Blog</a>
                 </li>
 
                 <li>
-                    <a href="contact-us.html">Contact</a>
+                    <a href="{{ route('contact.us') }}">Contact</a>
                 </li>
             </ul>
-        </div>
-        <div class="lonyo-mobile-menu-btn">
-            <a class="lonyo-default-btn sm-size" href="contact-us.html" data-text="Get in Touch"><span class="btn-wraper">Get in Touch</span></a>
-            <a class="lonyo-default-btn sm-size" href="contact-us.html" data-text="Get in Touch"><span class="btn-wraper">Get in Touch</span></a>
         </div>
     </div>
 </div>
